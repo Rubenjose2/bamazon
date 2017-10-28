@@ -3,6 +3,8 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");
 var clc = require("cli-color");
+// var manager_V = require("./bamazonManager.js");
+var dtb = require("./database_connect");
 
 //Some color cool Setups
 var error = clc.red.bold;
@@ -12,15 +14,13 @@ var notice = clc.blue;
 
 //Database Connection with Bamazon
 var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-
+    host: dtb.host,
+    port: dtb.port,
     // Your username
-    user: "root",
-
+    user: dtb.user,
     // Your password
-    password: "",
-    database: "bamazon"
+    password: dtb.password,
+    database: dtb.database
 });
 // Ending of DATABASE connection
 
@@ -69,6 +69,8 @@ function main_menu() {
             case "User":
                 UserOption();
                 break;
+            case "Manager":
+                // manager_V();
             default:
                 break;
         }
@@ -89,24 +91,23 @@ function UserOption() {
     })
 }
 
-
-
-
 //function to query a product and returning the quantity
 
 function product_buy(id, buy_amount) {
     var qta = 0;
     var prod_description = "";
     var prod_price = 0;
+    // This query quill receive from customer, the product ID we wants to Buy.
     var promise = new Promise(function(resolve, reject) { //We are creating a promise in order to Run the Query asynchronously
         var query = "SELECT `product`.`stock_quantity` as stock, `product`.`product_name` as Product_name, product.`price` as price from product WHERE product.`item_id` = ?;"
         connection.query(query, [id], function(err, result) {
-            if (err) throw err;
-            qta = result[0].stock;
-            prod_description = result[0].Product_name;
-            prod_price = result[0].price;
-            resolve([qta, prod_description, prod_price]); // Will update the value once the Query is already resolved
-        })
+                if (err) throw err;
+                qta = result[0].stock;
+                prod_description = result[0].Product_name;
+                prod_price = result[0].price;
+                resolve([qta, prod_description, prod_price]); // Will update the value once the Query is already resolved
+            })
+            // After query the product , the PROMISE will return back the Quantity of that product, the description and the product price
     });
     promise.then(function(val) { // After the query is completed then we go and update the database or check is there is stock
         var value_updated = val[0] - buy_amount;
@@ -115,9 +116,10 @@ function product_buy(id, buy_amount) {
             var query = "UPDATE `product` set product.`stock_quantity`=? WHERE product.`item_id` = ?";
             connection.query(query, [value_updated, id], function(err, result) {
                 console.log(notice("Thanks for buying " + val[1] + ", your order have been processed for $ " + purchase));
-            })
+            });
         } else {
             console.log(error("**** We are sorry but there is no enough stock of this product *****"));
         }
     });
+
 }
