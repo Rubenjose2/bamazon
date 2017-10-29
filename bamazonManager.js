@@ -15,6 +15,10 @@ var connection = mysql.createConnection({
     password: dtb.password,
     database: dtb.database
 });
+//Some color cool Setups
+var error = clc.red.bold;
+var warn = clc.yellow;
+var notice = clc.blue;
 
 
 var manager = function manager_view() {
@@ -39,8 +43,8 @@ var manager = function manager_view() {
                     case "Add to Inventory":
                         addInventory();
                         break;
-                    case "Add New Product":
-
+                    case "Add a New Product":
+                        addNewProduct();
                         break;
                     default:
                         break;
@@ -135,12 +139,48 @@ var manager = function manager_view() {
             })
         }
 
+        function addNewProduct() {
+            //This section would query the table department and print the options for the manager to add the department
+            // This chould bring back the description and the ID
+            var query_department = "select `department`.`department_id` as ID, `department`.`department_name` as department from `department`";
+            var departments = [];
+            // This beutifull :) part will collect the result from the query and buil an OBJECT with description and the ID. 
+            // We need it in order to buil the choice option into the propmt and collect the index to add into the database and not the description
+            connection.query(query_department, function(err, res) {
+                    for (var i = 0; i < res.length; i++) {
+                        departments.push({ name: res[i].department, value: res[i].ID });
+                    }
+                    return departments;
+                })
+                //========= Prompting and Adding into the database==========
+            inquirer.prompt([{
+                    name: "description",
+                    type: "input",
+                    message: "Please enter the description"
+                },
+                {
+                    name: "price",
+                    type: "input",
+                    message: "Please enter the price of the product"
+                }, {
+                    name: "department",
+                    type: "list",
+                    message: "Please select the Department",
+                    choices: departments
+                }
 
-
-
+            ]).then(function(answare) {
+                var query = "INSERT INTO `product`(product.`product_name`,product.`price`,`product`.`department_name`,`product`.`stock_quantity`) VALUES (?,?,?,0)"
+                connection.query(query, [answare.description, answare.price, answare.department], function(err, res) {
+                    if (err) throw err;
+                    console.log(notice("You product " + answare.description + " have beed added"));
+                    manager_view();
+                })
+            })
+        }
     } // End of function manager_view
 
 
 
-// module.exports = manager;
-manager();
+module.exports = manager;
+// manager();

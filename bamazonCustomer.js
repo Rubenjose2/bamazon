@@ -3,7 +3,7 @@ var mysql = require("mysql");
 var inquirer = require("inquirer");
 var Table = require("cli-table");
 var clc = require("cli-color");
-// var manager_V = require("./bamazonManager.js");
+var manager_V = require("./bamazonManager.js");
 var dtb = require("./database_connect");
 
 //Some color cool Setups
@@ -70,7 +70,7 @@ function main_menu() {
                 UserOption();
                 break;
             case "Manager":
-                // manager_V();
+                manager_V();
             default:
                 break;
         }
