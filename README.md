@@ -6,7 +6,7 @@ The solution work only on the console.
 
 ![video](./images/Bamazon.gif)
 
-![Video](https://youtu.be/5WY74am_pgE)
+![Video](https://www.youtube.com/watch?v=5WY74am_pgE)
 # Technologies used
 
 * node.js
