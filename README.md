@@ -60,15 +60,21 @@ The manager setup would let the user choose this different option:
 View product on sale, would query all the product 
 
 ## Product with Low Inventory 
-![products on sale](./images/4.png)
+![products on low inventory](./images/4.png)
 
 Would show the product with stock on 0
 
 ## Add Quatities
 
-![products on sale](./images/5.png)
+![products on quantities](./images/5.png)
 
 After adding a to the stock , the system would Query the product updated
 
+## Add a new Product
+
+![products news](./images/6.png)
+
+Add a new product, would ask to the user for the description, the price and the department.
+![products new 3](./images/7.png)
 
 
