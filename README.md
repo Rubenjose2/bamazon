@@ -4,7 +4,7 @@ Virtual Store using NODE and Mysql
 The bamazon solution is oriented a have a virtual store. The purpose is to have the user to buy, add, and update products.
 The solution work only on the console.
 
-![video]((./images/Bamazon.flv))
+![video]((./images/Bamazon.gif))
 
 # Technologies used
 
