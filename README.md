@@ -36,5 +36,5 @@ In order to start the solution user have to type:
 
 ### First Menu
 
-![Princial Menu](/images/Screen Shot 2017-10-29 at 12.25.46 PM.png)
+![Princial Menu](./images/1.png)
 
