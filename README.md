@@ -6,6 +6,7 @@ The solution work only on the console.
 
 ![video](./images/Bamazon.gif)
 
+![Video YouTube]((https://youtu.be/5WY74am_pgE))
 # Technologies used
 
 * node.js
@@ -79,7 +80,7 @@ After adding a to the stock , the system would Query the product updated
 Add a new product, would ask to the user for the description, the price and the department.
 ![products new 3](./images/7.png)
 
-#DATABASE
+# DATABASE
 
 The solution user MySql to store all the data. Update and query requirement from the user.
 I use two databases:
