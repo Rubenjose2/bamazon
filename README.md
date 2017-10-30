@@ -4,7 +4,7 @@ Virtual Store using NODE and Mysql
 The bamazon solution is oriented a have a virtual store. The purpose is to have the user to buy, add, and update products.
 The solution work only on the console.
 
-#Technologies used
+# Technologies used
 
 * node.js
 * javascript
@@ -13,14 +13,15 @@ The solution work only on the console.
 * mysql
 * clie- color
 * inquirer
+* Promises
 
-##PRE-requirements
+## PRE-requirements
 
 * node.js
 * Mysql
 
 
-##Installation
+## Installation
 
 After downloading the Gib, the user has to open de console and press:
 
@@ -28,13 +29,46 @@ After downloading the Gib, the user has to open de console and press:
 
 This would install all the packages required to work
 
-#Description
+# Description
 
 In order to start the solution user have to type:
 
 `node bamazonCustomer.js`
 
-### First Menu
+## First Menu
 
 ![Princial Menu](./images/1.png)
+
+This menu shows the customer the table with all the products, prices, quantities,  and department.
+The prompt would ask the customer for the ID he wants to buy and the quantities.
+After the selection, the prompt would result in the confirmation and the amount bought. If there is no availability the system would not let the customer buy and give an error.
+
+All these procedures are queries from the database and updated the database.
+
+![Principal Result](./images/2.png)
+
+## Manager User
+
+![Manager Menu](./images/3.png)
+
+The manager setup would let the user choose this different option:
+* View product of Sales
+* View low inventory
+* Add quantity to the inventory
+* Add a new product 
+
+View product on sale, would query all the product 
+
+## Product with Low Inventory 
+![products on sale](./images/4.png)
+
+Would show the product with stock on 0
+
+## Add Quatities
+
+![products on sale](./images/5.png)
+
+After adding a to the stock , the system would Query the product updated
+
+
 
